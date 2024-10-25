@@ -98,15 +98,6 @@ export default function LoginPage() {
             Log In
           </button>
         </form>
-        <div className="divider divider-accent mt-7">OR</div>
-        <p className="text-center">
-          {" "}
-          Don&apos;t have an account yet?{" "}
-          <Link to="/register" className="underline">
-            {" "}
-            Register{" "}
-          </Link>{" "}
-        </p>
       </div>
     </div>
   );

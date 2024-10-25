@@ -60,7 +60,7 @@ export default function Navbar() {
               <Link to="/companies">Category List</Link>
             </li>
             <li>
-              <a>Add User</a>
+              <Link to="/add-user">Add User</Link>
             </li>
           </ul>
         )}

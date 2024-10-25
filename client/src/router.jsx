@@ -58,6 +58,17 @@ const router = createBrowserRouter([
           throw redirect("/login");
         },
       },
+      {
+        path: "add-user",
+        element: <RegisterPage />,
+        loader: () => {
+          const access_token = localStorage.getItem("access_token");
+          if (access_token) {
+            return null;
+          }
+          throw redirect("/login");
+        },
+      },
     ],
   },
 ]);
