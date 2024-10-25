@@ -37,13 +37,13 @@ export default function Navbar() {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a>Dashboard</a>
+                <Link to="/jobs">Dashboard</Link>
               </li>
               <li>
-                <a>Category List</a>
+                <Link to="/companies">Category List</Link>
               </li>
               <li>
-                <a>Add User</a>
+                <Link to="/add-user">Add User</Link>
               </li>
             </ul>
           )}

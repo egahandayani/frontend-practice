@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import practiceApi from "../helpers/http-client";
 
 export default function DashboardJobs() {
@@ -46,12 +46,14 @@ export default function DashboardJobs() {
       <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-6">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-gray-700">List of Jobs</h1>
-          <button 
-            className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
-            onClick={() => navigate("/add-new-job")}
-          >
-            Add New Job
-          </button>
+          <Link to="/jobs/create">
+            <button
+              className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
+              onClick={() => navigate("/add-new-job")}
+            >
+              Add New Job
+            </button>
+          </Link>
         </div>
 
         <div className="overflow-x-auto">
@@ -69,23 +71,34 @@ export default function DashboardJobs() {
             </thead>
             <tbody className="text-black text-sm font-light">
               {jobs.map((el, index) => (
-                <tr key={el.id} className="border-b border-gray-200 hover:bg-gray-100">
-                  <td className="py-3 px-6 text-left whitespace-nowrap">{index + 1}</td>
+                <tr
+                  key={el.id}
+                  className="border-b border-gray-200 hover:bg-gray-100"
+                >
+                  <td className="py-3 px-6 text-left whitespace-nowrap">
+                    {index + 1}
+                  </td>
                   <td className="py-3 px-6 text-left">{el.title}</td>
                   <td className="py-3 px-6 text-left">{el.jobType}</td>
                   <td className="py-3 px-6 text-left">{el.User.email}</td>
                   <td className="py-3 px-6 text-left">{el.User.phoneNumber}</td>
-                  <td className="py-3 px-6 text-left">{formatDatetoUS(el.createdAt)}</td>
+                  <td className="py-3 px-6 text-left">
+                    {formatDatetoUS(el.createdAt)}
+                  </td>
                   <td className="py-3 px-6 text-left flex space-x-2">
-                    <button 
+                    <button
                       className="bg-red-500 text-white py-1 px-3 rounded-lg shadow hover:bg-red-600 transition duration-300"
-                      onClick={() => {/* handle delete */}}
+                      onClick={() => {
+                        /* handle delete */
+                      }}
                     >
                       Delete
                     </button>
-                    <button 
+                    <button
                       className="bg-yellow-500 text-white py-1 px-3 rounded-lg shadow hover:bg-yellow-600 transition duration-300"
-                      onClick={() => {/* handle edit */}}
+                      onClick={() => {
+                        /* handle edit */
+                      }}
                     >
                       Edit
                     </button>
