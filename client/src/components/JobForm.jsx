@@ -163,13 +163,13 @@ export default function JobForm({ data, formType }) {
           <div className="mb-3">
             <label className="flex items-center gap-2">
               <select
-                className="input input-bordered w-full bg-gray-700 text-gray-400 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent hover:bg-gray-800 transition ease-in-out duration-150"
+                className="input input-bordered w-full bg-gray-850 text-gray-400 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent hover:bg-gray-800 transition ease-in-out duration-150"
                 id="companyId"
                 value={formData.companyId || ""}
                 onChange={handleChange}
               >
                 <option value="" disabled>
-                  -- Select Company --
+                  Select Company
                 </option>
                 {companies.map((company) => (
                   <option key={company.id} value={company.id}>
