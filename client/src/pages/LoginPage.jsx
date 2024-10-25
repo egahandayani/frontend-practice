@@ -2,11 +2,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import practiceApi from "../helpers/http-client";
 import Swal from "sweetalert2";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = async (el) => {
     el.preventDefault();
@@ -17,7 +19,7 @@ export default function LoginPage() {
         password,
       });
 
-      localStorage.setItem("access_token", data.data.access_token);
+      login(data.data.access_token);
       Swal.fire({
         icon: "success",
         title: "Login Successful",

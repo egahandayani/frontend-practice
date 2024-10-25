@@ -18,7 +18,6 @@ export default function DashboardJobs() {
     );
   };
 
-  // Fetch All Jobs
   const fetchJobs = async () => {
     try {
       const { data } = await practiceApi.get("/apis/career-portal/jobs", {
@@ -43,39 +42,53 @@ export default function DashboardJobs() {
   }, []);
 
   return (
-    <div>
-      <div>
-        <h1>List bf Jobs</h1>
-        <button className="btn btn-accent">Add New Job</button>
-      </div>
-      <div>
+    <div className="min-h-screen bg-gray-100 p-6">
+      <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-6">
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl font-bold text-gray-700">List of Jobs</h1>
+          <button 
+            className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
+            onClick={() => navigate("/add-new-job")}
+          >
+            Add New Job
+          </button>
+        </div>
+
         <div className="overflow-x-auto">
-          <table className="table">
-            {/* head */}
-            <thead>
+          <table className="min-w-full bg-white">
+            <thead className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
               <tr>
-                <th>No</th>
-                <th>Title Job</th>
-                <th>Type</th>
-                <th>Posted By</th>
-                <th>Phone Number</th>
-                <th>Created At</th>
+                <th className="py-3 px-6 text-left">No</th>
+                <th className="py-3 px-6 text-left">Title Job</th>
+                <th className="py-3 px-6 text-left">Type</th>
+                <th className="py-3 px-6 text-left">Posted By</th>
+                <th className="py-3 px-6 text-left">Phone Number</th>
+                <th className="py-3 px-6 text-left">Created At</th>
+                <th className="py-3 px-6 text-left">Actions</th>
               </tr>
             </thead>
-            <tbody id="table-jobs">
+            <tbody className="text-black text-sm font-light">
               {jobs.map((el, index) => (
-                <tr key={el.id}>
-                  <th>{index + 1}</th>
-                  <td>{el.title}</td>
-                  <td>{el.jobType}</td>
-                  <td>{el.User.email}</td>
-                  <td>{el.User.phoneNumber}</td>
-                  <td>{formatDatetoUS(el.createdAt)}</td>
-                  <td>
-                    <button> Delete </button>
-                  </td>
-                  <td>
-                    <button> Edit </button>
+                <tr key={el.id} className="border-b border-gray-200 hover:bg-gray-100">
+                  <td className="py-3 px-6 text-left whitespace-nowrap">{index + 1}</td>
+                  <td className="py-3 px-6 text-left">{el.title}</td>
+                  <td className="py-3 px-6 text-left">{el.jobType}</td>
+                  <td className="py-3 px-6 text-left">{el.User.email}</td>
+                  <td className="py-3 px-6 text-left">{el.User.phoneNumber}</td>
+                  <td className="py-3 px-6 text-left">{formatDatetoUS(el.createdAt)}</td>
+                  <td className="py-3 px-6 text-left flex space-x-2">
+                    <button 
+                      className="bg-red-500 text-white py-1 px-3 rounded-lg shadow hover:bg-red-600 transition duration-300"
+                      onClick={() => {/* handle delete */}}
+                    >
+                      Delete
+                    </button>
+                    <button 
+                      className="bg-yellow-500 text-white py-1 px-3 rounded-lg shadow hover:bg-yellow-600 transition duration-300"
+                      onClick={() => {/* handle edit */}}
+                    >
+                      Edit
+                    </button>
                   </td>
                 </tr>
               ))}

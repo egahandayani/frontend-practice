@@ -1,4 +1,16 @@
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+
 export default function Navbar() {
+  const { isLogin, logout } = useAuth();
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
   return (
     <div className="navbar bg-gray-700">
       <div className="navbar-start">
@@ -19,10 +31,28 @@ export default function Navbar() {
               />
             </svg>
           </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-          >
+          {isLogin && (
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            >
+              <li>
+                <a>Dashboard</a>
+              </li>
+              <li>
+                <a>Category List</a>
+              </li>
+              <li>
+                <a>Add User</a>
+              </li>
+            </ul>
+          )}
+        </div>
+        <a className="btn btn-ghost text-xl">CariKerja</a>
+      </div>
+      <div className="navbar-center hidden lg:flex">
+        {isLogin && (
+          <ul className="menu menu-horizontal px-1">
             <li>
               <a>Dashboard</a>
             </li>
@@ -33,24 +63,18 @@ export default function Navbar() {
               <a>Add User</a>
             </li>
           </ul>
-        </div>
-        <a className="btn btn-ghost text-xl">CariKerja</a>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <a>Dashboard</a>
-          </li>
-          <li>
-            <a>Category List</a>
-          </li>
-          <li>
-            <a>Add User</a>
-          </li>
-        </ul>
+        )}
       </div>
       <div className="navbar-end">
-        <a className="btn btn-success">Login</a>
+        {isLogin ? (
+          <button className="btn btn-error" onClick={handleLogout}>
+            Logout
+          </button>
+        ) : (
+          <Link to="/login" className="btn btn-success">
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );
