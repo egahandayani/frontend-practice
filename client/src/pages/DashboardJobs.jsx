@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import practiceApi from "../helpers/http-client";
+import Swal from "sweetalert2";
 
 export default function DashboardJobs() {
   const navigate = useNavigate();
@@ -18,6 +19,44 @@ export default function DashboardJobs() {
     );
   };
 
+  // Handle For Delete Job
+  const handleDeleteJob = async (jobId) => {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      });
+
+      if (result.isConfirmed) {
+        await practiceApi.delete(`/apis/career-portal/jobs/${jobId}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        });
+
+        await fetchJobs();
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your job has been deleted.",
+          icon: "success",
+        });
+      }
+    } catch (err) {
+      console.log("🚀 ~ handleDeleteJob ~ err:", err);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: err?.response?.data?.error || "Something went wrong! ",
+      });
+    }
+  };
+
+  // Fetch All Jobs
   const fetchJobs = async () => {
     try {
       const { data } = await practiceApi.get("/apis/career-portal/jobs", {
@@ -86,18 +125,18 @@ export default function DashboardJobs() {
                     {formatDatetoUS(el.createdAt)}
                   </td>
                   <td className="py-3 px-6 text-left flex space-x-2">
-                    <button
-                      className="bg-red-500 text-white py-1 px-3 rounded-lg shadow hover:bg-red-600 transition duration-300"
-                      onClick={() => {
-                        /* handle delete */
-                      }}
-                    >
-                      Delete
-                    </button>
-                    <Link to={`/jobs/edit/${el.id}`}>
+                    <Link to="/jobs">
                       <button
-                        className="bg-yellow-500 text-white py-1 px-3 rounded-lg shadow hover:bg-yellow-600 transition duration-300"
+                        className="bg-red-500 text-white py-1 px-3 rounded-lg shadow hover:bg-red-600 transition duration-300"
+                        onClick={() => {
+                          handleDeleteJob(el.id);
+                        }}
                       >
+                        Delete
+                      </button>
+                    </Link>
+                    <Link to={`/jobs/edit/${el.id}`}>
+                      <button className="bg-yellow-500 text-white py-1 px-3 rounded-lg shadow hover:bg-yellow-600 transition duration-300">
                         Edit
                       </button>
                     </Link>
