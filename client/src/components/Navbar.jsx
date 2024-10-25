@@ -54,10 +54,10 @@ export default function Navbar() {
         {isLogin && (
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a>Dashboard</a>
+              <Link to="/jobs">Dashboard</Link>
             </li>
             <li>
-              <a>Category List</a>
+              <Link to="/companies">Category List</Link>
             </li>
             <li>
               <a>Add User</a>

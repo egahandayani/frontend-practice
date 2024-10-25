@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import RootLayout from "./layouts/RootLayout";
 import DetailJobPage from "./pages/DetailJobPage";
 import DashboardJobs from "./pages/DashboardJobs";
+import CompanyList from "./pages/CompanyList";
 
 const router = createBrowserRouter([
   {
@@ -35,15 +36,20 @@ const router = createBrowserRouter([
         path: "jobs/:id",
         element: <DetailJobPage />,
       },
-    ],
-  },
-  {
-    path: "/",
-    element: <RootLayout />,
-    children: [
       {
         path: "jobs",
         element: <DashboardJobs />,
+        loader: () => {
+          const access_token = localStorage.getItem("access_token");
+          if (access_token) {
+            return null;
+          }
+          throw redirect("/login");
+        },
+      },
+      {
+        path: "companies",
+        element: <CompanyList />,
         loader: () => {
           const access_token = localStorage.getItem("access_token");
           if (access_token) {
