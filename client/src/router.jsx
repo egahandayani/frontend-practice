@@ -7,6 +7,7 @@ import DetailJobPage from "./pages/DetailJobPage";
 import DashboardJobs from "./pages/DashboardJobs";
 import CompanyList from "./pages/CompanyList";
 import CreateJob from "./pages/CreateJob";
+import UpdateJob from "./pages/UpdateJob";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +74,17 @@ const router = createBrowserRouter([
       {
         path: "jobs/create",
         element: <CreateJob />,
+        loader: () => {
+          const access_token = localStorage.getItem("access_token");
+          if (access_token) {
+            return null;
+          }
+          throw redirect("/login");
+        },
+      },
+      {
+        path: "jobs/edit/:id",
+        element: <UpdateJob />,
         loader: () => {
           const access_token = localStorage.getItem("access_token");
           if (access_token) {

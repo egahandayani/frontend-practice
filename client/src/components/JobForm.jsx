@@ -183,7 +183,7 @@ export default function JobForm({ data, formType }) {
             type="submit"
             className="btn btn-accent w-full py-3 text-lg font-semibold rounded-lg transition-all duration-300 hover:bg-accent-focus hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-accent-focus"
           >
-            Create
+            Submit
           </button>
         </form>
       </div>

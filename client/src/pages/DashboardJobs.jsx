@@ -94,14 +94,13 @@ export default function DashboardJobs() {
                     >
                       Delete
                     </button>
-                    <button
-                      className="bg-yellow-500 text-white py-1 px-3 rounded-lg shadow hover:bg-yellow-600 transition duration-300"
-                      onClick={() => {
-                        /* handle edit */
-                      }}
-                    >
-                      Edit
-                    </button>
+                    <Link to={`/jobs/edit/${el.id}`}>
+                      <button
+                        className="bg-yellow-500 text-white py-1 px-3 rounded-lg shadow hover:bg-yellow-600 transition duration-300"
+                      >
+                        Edit
+                      </button>
+                    </Link>
                   </td>
                 </tr>
               ))}

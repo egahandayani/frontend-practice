@@ -9,6 +9,8 @@ export default function DetailJobPage() {
   const [job, setJob] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
+  
+  // Fetch Data Job By Id
   const fetchJobById = async () => {
     try {
       setIsLoading(true);
